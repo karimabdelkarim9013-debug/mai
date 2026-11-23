@@ -1,0 +1,465 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>I Love You Mai ❤️</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: radial-gradient(circle, #30101e, #130a16 55%, #050509);
+    font-family: 'Courier New', monospace;
+    overflow: hidden;
+    color: white;
+}
+
+.container {
+    width: 100%;
+    text-align: center;
+    padding: 20px;
+    position: relative;
+    z-index: 2;
+}
+
+.main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 45px;
+    flex-wrap: wrap;
+}
+
+/* CODE WINDOW */
+
+.code-box {
+    width: 280px;
+    min-height: 205px;
+    background: rgba(12, 12, 22, .95);
+    border: 1px solid #ff315b;
+    border-radius: 12px;
+    box-shadow: 0 0 25px #ff174455;
+    overflow: hidden;
+    text-align: left;
+}
+
+.top {
+    height: 32px;
+    background: #24212d;
+    padding: 10px 12px;
+}
+
+.dot {
+    display: inline-block;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    margin-right: 5px;
+}
+
+.red { background: #ff5f57; }
+.yellow { background: #febc2e; }
+.green { background: #28c840; }
+
+#code {
+    padding: 16px;
+    color: #ff7191;
+    font-size: 12px;
+    line-height: 1.9;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    min-height: 170px;
+}
+
+.cursor {
+    display: inline-block;
+    width: 7px;
+    height: 14px;
+    background: #ff315b;
+    animation: blink .7s infinite;
+}
+
+@keyframes blink {
+    50% { opacity: 0; }
+}
+
+/* HEART */
+
+.heart-container {
+    width: 220px;
+    filter: drop-shadow(0 0 12px #ff1744);
+}
+
+.heart-svg {
+    width: 100%;
+    overflow: visible;
+}
+
+.heart-outline {
+    fill: transparent;
+    stroke: #ff1744;
+    stroke-width: 4;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 600;
+    stroke-dashoffset: 600;
+    animation:
+        drawHeart 4s ease-in-out .5s forwards,
+        fillHeart 1.2s ease 4.5s forwards;
+}
+
+@keyframes drawHeart {
+    to { stroke-dashoffset: 0; }
+}
+
+@keyframes fillHeart {
+    to { fill: #ff1744; }
+}
+
+.heart-container.complete {
+    animation: heartbeat 1s ease-in-out infinite;
+}
+
+@keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    15% { transform: scale(1.15); }
+    30% { transform: scale(1); }
+    45% { transform: scale(1.1); }
+}
+
+/* LOVE TEXT */
+
+.love-text {
+    margin-top: 35px;
+    font-family: Georgia, serif;
+    font-size: clamp(28px, 6vw, 45px);
+    letter-spacing: 5px;
+    opacity: 0;
+    animation: showText 2s ease 5.5s forwards;
+    text-shadow: 0 0 15px #ff1744;
+}
+
+.love-text span {
+    color: #ff315b;
+}
+
+.subtitle {
+    margin-top: 14px;
+    color: #d9a5b5;
+    letter-spacing: 3px;
+    font-size: 12px;
+    opacity: 0;
+    animation: showText 2s ease 6s forwards;
+}
+
+@keyframes showText {
+    to { opacity: 1; }
+}
+
+/* MUSIC PLAYER */
+
+.music-player {
+    margin: 35px auto 0;
+    width: 280px;
+    padding: 18px;
+    border: 1px solid #ff315b66;
+    border-radius: 18px;
+    background: rgba(20, 10, 20, .75);
+    box-shadow: 0 0 25px #ff174422;
+}
+
+.music-title {
+    font-size: 13px;
+    letter-spacing: 2px;
+    color: #ff8ba5;
+    margin-bottom: 15px;
+}
+
+.music-button {
+    width: 55px;
+    height: 55px;
+    border: none;
+    border-radius: 50%;
+    background: #ff315b;
+    color: white;
+    font-size: 23px;
+    cursor: pointer;
+    box-shadow: 0 0 20px #ff174477;
+    transition: .3s;
+}
+
+.music-button:hover {
+    transform: scale(1.12);
+    box-shadow: 0 0 30px #ff1744;
+}
+
+.volume {
+    width: 100%;
+    margin-top: 18px;
+    accent-color: #ff315b;
+    cursor: pointer;
+}
+
+.music-status {
+    margin-top: 10px;
+    font-size: 11px;
+    color: #d9a5b5;
+}
+
+/* FLOATING HEARTS */
+
+.particle {
+    position: absolute;
+    bottom: -30px;
+    color: #ff416c;
+    opacity: 0;
+    animation: floatUp linear forwards;
+    pointer-events: none;
+}
+
+@keyframes floatUp {
+    0% {
+        transform: translateY(0) rotate(0deg) scale(.5);
+        opacity: 0;
+    }
+    20% { opacity: .8; }
+    100% {
+        transform: translateY(-110vh) rotate(360deg) scale(1.4);
+        opacity: 0;
+    }
+}
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+    .main {
+        flex-direction: column;
+        gap: 25px;
+    }
+
+    .code-box { width: 270px; }
+    .heart-container { width: 170px; }
+    .love-text {
+        margin-top: 20px;
+        letter-spacing: 3px;
+    }
+
+    .music-player { margin-top: 25px; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="main">
+
+        <!-- CODE BOX -->
+
+        <div class="code-box">
+
+            <div class="top">
+                <span class="dot red"></span>
+                <span class="dot yellow"></span>
+                <span class="dot green"></span>
+            </div>
+
+            <div id="code"></div>
+
+        </div>
+
+        <!-- HEART -->
+
+        <div class="heart-container" id="heart">
+
+            <svg viewBox="0 0 200 180" class="heart-svg">
+
+                <path
+                    d="M100 155
+                       C80 135 15 95 15 55
+                       C15 10 75 0 100 48
+                       C125 0 185 10 185 55
+                       C185 95 120 135 100 155Z"
+                    class="heart-outline"
+                />
+
+            </svg>
+
+        </div>
+
+    </div>
+
+    <!-- LOVE MESSAGE -->
+
+    <h1 class="love-text">
+        I LOVE YOU <span>MAI ❤️</span>
+    </h1>
+
+    <p class="subtitle">
+        YOU ARE MY FAVORITE PERSON ✨
+    </p>
+
+    <!-- MUSIC PLAYER -->
+
+    <div class="music-player">
+
+        <p class="music-title">A SONG FOR YOU ❤️</p>
+
+        <button class="music-button" id="playBtn"
+                onclick="toggleMusic()">
+            ▶
+        </button>
+
+        <audio id="music" loop>
+            <source src="101.mp3" type="audio/mpeg">
+        </audio>
+
+        <input
+            class="volume"
+            type="range"
+            min="0"
+            max="1"
+            step="0.01"
+            value="0.7"
+            id="volume"
+        >
+
+        <p class="music-status" id="status">
+            Press play to hear our song
+        </p>
+
+    </div>
+
+</div>
+
+<script>
+
+// CODE TYPING
+
+const message = `const myHeart = {
+  name: "Mai",
+  love: Infinity,
+  forever: true
+};
+
+while (true) {
+  I love you ❤️
+}`;
+
+let index = 0;
+const codeElement = document.getElementById("code");
+
+function typeCode() {
+    if (index < message.length) {
+
+        const char = message[index];
+
+        codeElement.innerHTML +=
+            char === "\n" ? "<br>" :
+            char === " " ? "&nbsp;" :
+            char === "<" ? "&lt;" :
+            char === ">" ? "&gt;" :
+            char === "&" ? "&amp;" :
+            char;
+
+        index++;
+        setTimeout(typeCode, 55);
+
+    } else {
+        codeElement.innerHTML +=
+            '<span class="cursor"></span>';
+    }
+}
+
+typeCode();
+
+
+// HEART ANIMATION
+
+setTimeout(() => {
+    document.getElementById("heart")
+        .classList.add("complete");
+}, 5700);
+
+
+// MUSIC PLAYER
+
+const music = document.getElementById("music");
+const playBtn = document.getElementById("playBtn");
+const statusText = document.getElementById("status");
+const volume = document.getElementById("volume");
+
+async function toggleMusic() {
+
+    if (music.paused) {
+        try {
+            await music.play();
+            playBtn.innerHTML = "Ⅱ";
+            statusText.innerHTML = "Playing for you, Mai ❤️";
+        } catch (error) {
+            statusText.innerHTML = "Check that 101.mp3 is in the folder";
+        }
+    } else {
+        music.pause();
+        playBtn.innerHTML = "▶";
+        statusText.innerHTML = "Music paused";
+    }
+}
+
+volume.addEventListener("input", () => {
+    music.volume = volume.value;
+});
+
+music.volume = 0.7;
+
+music.addEventListener("ended", () => {
+    playBtn.innerHTML = "▶";
+});
+
+music.addEventListener("error", () => {
+    statusText.innerHTML = "Please check the 101.mp3 file";
+});
+
+
+// FLOATING HEARTS
+
+function createParticle() {
+
+    const particle = document.createElement("div");
+
+    particle.className = "particle";
+    particle.innerHTML = "♥";
+
+    particle.style.left = Math.random() * 100 + "vw";
+
+    particle.style.fontSize =
+        (12 + Math.random() * 20) + "px";
+
+    particle.style.animationDuration =
+        (5 + Math.random() * 5) + "s";
+
+    document.body.appendChild(particle);
+
+    setTimeout(() => {
+        particle.remove();
+    }, 10000);
+}
+
+setInterval(createParticle, 500);
+
+</script>
+
+</body>
+</html>
